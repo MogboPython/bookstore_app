@@ -19,11 +19,15 @@ func connectDatabase() {
 	dbPass := os.Getenv("DB_PASSWORD")
 	dbName := os.Getenv("DB_NAME")
 	db, err = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
-	// db, err = sql.Open("mysql", "root:root@/test")
 
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
-
+	err = db.Ping()
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println("Database connected.")
+	// defer db.Close()
+	// return db
 }

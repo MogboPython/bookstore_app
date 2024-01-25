@@ -9,9 +9,11 @@ import (
 func addApproutes(route *mux.Router) {
 	// setStaticFolder(route)
 	// route.HandleFunc("/", renderHome)
-	// route.HandleFunc("/user", getUsers).Methods("GET")
-	// route.HandleFunc("/user", insertUser).Methods("POST")
-	// route.HandleFunc("/user/{id}", deleteUser).Methods("DELETE")
-	// route.HandleFunc("/user", updateUser).Methods("PUT")
-	fmt.Println("Routes are Loded.")
+	route.HandleFunc("/books", getBooks).Methods("GET")
+	// route.HandleFunc("/books/{id}", getBook).Methods("GET")
+	route.HandleFunc("/submit_book", insertBook).Methods("POST")
+	// route.HandleFunc("/book/{id}", deleteBook).Methods("DELETE")
+	// route.HandleFunc("/book", updateBook).Methods("PUT")
+	// route.HandleFunc("/book/{id}", borrowBook).Methods("POST")
+	fmt.Println("Routes are Loaded.")
 }

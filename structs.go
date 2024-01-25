@@ -12,7 +12,6 @@ type Book struct {
 	Publisher      string `json:"publisher"`
 	Year_published int    `json:"year_published"`
 	Genre          string `json:"genre"`
-	Is_loaned      bool   `json:"is_loaned"`
 }
 
 // Customers is Interface for customer details.
