@@ -83,3 +83,18 @@ func deleteBookHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintln(w, "Book deleted successfully")
 }
+
+func loanBookHandler(w http.ResponseWriter, request *http.Request) {
+	var loan Loan
+	json.NewDecoder(request.Body).Decode(&loan)
+
+	// Call the NewLoan function to add a newly borrowed book to the database
+	err = NewBookLoan(db, loan.Customer_id, loan.Book_id, loan.Time_frame)
+	if err != nil {
+		http.Error(w, "Failed to assign book", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	fmt.Fprintln(w, "Book loaned successfully")
+}

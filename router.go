@@ -14,6 +14,6 @@ func addApproutes(route *mux.Router) {
 	route.HandleFunc("/submit_book", insertBookHandler).Methods("POST")
 	route.HandleFunc("/books/{id}", deleteBookHandler).Methods("DELETE")
 	// route.HandleFunc("/book", updateBook).Methods("PUT")
-	// route.HandleFunc("/book/{id}", borrowBook).Methods("POST")
+	route.HandleFunc("/loan_book", loanBookHandler).Methods("POST")
 	fmt.Println("Routes are Loaded.")
 }

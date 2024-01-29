@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"time"
 )
 
 func CreateBook(db *sql.DB, title, author, publisher, genre string, year int) error {
@@ -64,5 +65,20 @@ func DeleteBook(db *sql.DB, id int) error {
 		log.Println(err)
 		return err
 	}
+	return nil
+}
+
+func NewBookLoan(db *sql.DB, customer_id, book_id, time_frame int) error {
+	issued_date := time.Now()
+	formatted_date := issued_date.Format("2006-01-02 15:04")
+	due_date := issued_date.AddDate(0, time_frame, 0).Format("2006-01-02 15:04")
+
+	query := "INSERT INTO loans (customer_id, book_id, issued_date, due_date) VALUES (?, ?, ?, ?)"
+	_, err := db.Exec(query, customer_id, book_id, formatted_date, due_date)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
 	return nil
 }
